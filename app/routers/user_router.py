@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 class LoginRequest(BaseModel):
-    username: str
+    email: str
     password: str
 
 @router.get("/users")
@@ -19,7 +19,7 @@ def login(payload: LoginRequest):
     response = (
         supabase.table("users")
         .select("id_user,name,email,username,password")
-        .eq("username", payload.username)
+        .eq("email", payload.email)
         .limit(1)
         .execute()
     )
